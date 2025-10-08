@@ -1,0 +1,53 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import PlotFigure from "../../components/PlotFigure.astro";
+import * as Plot from "@observablehq/plot";
+import penguins from "../../assets/penguins.json";
+
+export async function getStaticPaths() {
+  const speciesList = [...new Set(penguins.map((p) => p.species))];
+  return speciesList.map((s) => ({ params: { species: s } }));
+}
+
+const { species } = Astro.params;
+const filtered = penguins.filter((p) => p.species === species);
+
+const plotOptions = {
+  grid: true,
+  marks: [
+    Plot.dot(filtered, {
+      x: "culmen_length_mm",
+      y: "culmen_depth_mm",
+      fill: "tomato",
+      r: 4,
+      fillOpacity: 0.7,
+    }),
+  ],
+  x: { label: "Longueur du bec (mm)" },
+  y: { label: "Profondeur du bec (mm)" },
+  title: `Culmen: profondeur vs longueur — ${species}`,
+};
+---
+
+<Layout>
+  <h1 class="text-4xl sm:text-5xl text-center mb-8 bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent font-bold">
+    Espèce (statique) · {species}
+  </h1>
+
+  <section class="bg-white/90 backdrop-blur rounded-2xl shadow-xl border border-indigo-100 p-6 sm:p-8">
+    <p class="text-gray-600 mb-4">{filtered.length} individu(s) trouvé(s)</p>
+
+    {filtered.length === 0 ? (
+      <p class="text-gray-500">Aucune donnée pour cette espèce.</p>
+    ) : (
+      <div class="rounded-xl border border-indigo-100/70 bg-white/80 p-4 sm:p-6 shadow-inner">
+        <PlotFigure options={plotOptions} />
+      </div>
+    )}
+
+    <div class="mt-6">
+      <a href="/rendu-statique" class="inline-block px-5 py-2 rounded-xl text-sm font-medium text-white bg-gradient-to-r from-fuchsia-500 to-indigo-500 hover:from-fuchsia-600 hover:to-indigo-600 shadow">← Retour à la liste</a>
+    </div>
+  </section>
+</Layout>
+

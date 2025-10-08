@@ -1,0 +1,32 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import penguins from "../../assets/penguins.json";
+
+const speciesList = [...new Set(penguins.map((p) => p.species))].sort();
+---
+
+<Layout>
+  <h1 class="text-4xl sm:text-5xl text-center mb-10 sm:mb-12 bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent font-bold">
+    Rendu statique · Espèces
+  </h1>
+
+  <section class="bg-white/90 backdrop-blur rounded-2xl shadow-xl border border-indigo-100 p-6 sm:p-8">
+    <p class="text-gray-600 mb-6">Routes pré‑rendues via <code class="px-1 py-0.5 rounded bg-indigo-50 text-indigo-700">getStaticPaths</code>.</p>
+    <ul class="flex flex-wrap gap-3 sm:gap-4 items-center">
+      {speciesList.map((s) => (
+        <li>
+          <a href={`/rendu-statique/${s}`} class="px-5 sm:px-6 py-2 rounded-xl text-sm sm:text-base font-medium transition-all duration-300 shadow hover:shadow-md bg-white text-gray-700 border border-indigo-100 hover:bg-indigo-50">
+            {s}
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <div class="mt-8 flex flex-wrap gap-3 sm:gap-4">
+      <a href="/" class="px-5 py-2 rounded-xl text-sm font-medium text-white bg-gradient-to-r from-indigo-500 to-violet-500 hover:from-indigo-600 hover:to-violet-600 shadow">Accueil</a>
+      <a href="/rendu-dynamique" class="px-5 py-2 rounded-xl text-sm font-medium text-white bg-gradient-to-r from-violet-500 to-fuchsia-500 hover:from-violet-600 hover:to-fuchsia-600 shadow">Version dynamique</a>
+      <a href="/penguins-all" class="px-5 py-2 rounded-xl text-sm font-medium text-white bg-gradient-to-r from-fuchsia-500 to-indigo-500 hover:from-fuchsia-600 hover:to-indigo-600 shadow">Tous les graphiques</a>
+    </div>
+  </section>
+</Layout>
+

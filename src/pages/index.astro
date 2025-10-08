@@ -6,16 +6,41 @@ import penguins from "../assets/penguins.json";
 ---
 
 <Layout>
-  <h1 class="text-2xl">Test Astro et Plot (Observablehq)</h1>
-  <PlotFigure
-    options={{
-      marks: [
-        Plot.dot(penguins, {
-          x: "culmen_length_mm",
-          y: "culmen_depth_mm",
-          stroke: "species",
-        }),
-      ],
-    }}
-  />
+  <h1 class="text-5xl sm:text-6xl text-center mb-10 sm:mb-14 bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent font-extrabold tracking-tight">
+    TP N4 · Visualisations
+  </h1>
+
+  <div class="grid gap-6 sm:gap-8">
+    <section class="bg-white/90 backdrop-blur rounded-2xl shadow-xl border border-indigo-100 p-6 sm:p-8">
+      <h2 class="text-xl sm:text-2xl font-light text-gray-700 mb-4">Aperçu global</h2>
+      <div class="rounded-xl border border-indigo-100/70 bg-white/80 p-4 sm:p-6 shadow-inner">
+        <PlotFigure
+          options={{
+            marks: [
+              Plot.dot(penguins, {
+                x: "culmen_length_mm",
+                y: "culmen_depth_mm",
+                stroke: "species",
+              }),
+            ],
+          }}
+        />
+      </div>
+    </section>
+
+    <section class="bg-white/90 backdrop-blur rounded-2xl shadow-xl border border-indigo-100 p-6 sm:p-8">
+      <h2 class="text-xl sm:text-2xl font-light text-gray-700 mb-6">Explorer</h2>
+      <ul class="flex flex-col sm:flex-row gap-3 sm:gap-4 items-center justify-center">
+        <li>
+          <a href="/penguins-all" class="block px-6 sm:px-8 py-3 rounded-2xl text-base sm:text-lg font-medium text-white transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-[1.02] bg-gradient-to-r from-indigo-500 to-violet-500 hover:from-indigo-600 hover:to-violet-600">Tous les graphiques</a>
+        </li>
+        <li>
+          <a href="/rendu-dynamique" class="block px-6 sm:px-8 py-3 rounded-2xl text-base sm:text-lg font-medium text-white transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-[1.02] bg-gradient-to-r from-violet-500 to-fuchsia-500 hover:from-violet-600 hover:to-fuchsia-600">Rendu dynamique</a>
+        </li>
+        <li>
+          <a href="/rendu-statique" class="block px-6 sm:px-8 py-3 rounded-2xl text-base sm:text-lg font-medium text-white transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-[1.02] bg-gradient-to-r from-fuchsia-500 to-indigo-500 hover:from-fuchsia-600 hover:to-indigo-600">Rendu statique</a>
+        </li>
+      </ul>
+    </section>
+  </div>
 </Layout>

@@ -3,24 +3,25 @@ import "../styles/global.css";
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <title>Astro Basics</title>
+    <title>Visualisations · Penguins</title>
   </head>
-  <body>
-    <slot />
+  <body class="min-h-screen bg-gradient-to-br from-indigo-50 via-violet-50 to-fuchsia-50 text-gray-800 antialiased">
+    <main class="p-6 sm:p-8">
+      <div class="max-w-6xl mx-auto">
+        <slot />
+      </div>
+    </main>
   </body>
+  
 </html>
 
 <style>
   html,
-  body {
-    margin: 0;
-    width: 100%;
-    height: 100%;
-  }
+  body { margin: 0; width: 100%; height: 100%; }
 </style>
